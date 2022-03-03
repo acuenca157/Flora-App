@@ -80,8 +80,8 @@ public class AddFloraActivity extends AppCompatActivity {
         flora = getIntent().getParcelableExtra("flora");
 
         efvm = new ViewModelProvider(this).get(EditFloraViewModel.class);
-        efvm.getEditFloraLiveData().observe(this, aLong -> {
-            if(aLong > 0) {
+        efvm.getEditFloraLiveData().observe(this, result -> {
+            if(result) {
                 Toast.makeText(AddFloraActivity.this, "Se ha editado la flora", Toast.LENGTH_LONG).show();
                 finish();
             } else {
@@ -166,6 +166,7 @@ public class AddFloraActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (flora != null){
+                    Log.v("xyzyx", "Entro en Edit");
                     Flora newFlora = getFlora();
                     newFlora.setId(flora.getId());
                     efvm.editFlora(flora.getId(), newFlora);
@@ -186,7 +187,7 @@ public class AddFloraActivity extends AppCompatActivity {
     }
 
     private void setCampos() {
-        etNombre.setEnabled(false);
+        //etNombre.setEnabled(false);
         etNombre.setText(flora.getNombre());
         etFamilia.setText(flora.getFamilia());
         etIdentificacion.setText(flora.getIdentificacion());

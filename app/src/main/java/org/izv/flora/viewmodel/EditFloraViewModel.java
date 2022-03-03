@@ -18,7 +18,7 @@ public class EditFloraViewModel extends AndroidViewModel {
         repository = new Repository(application);
     }
 
-    public MutableLiveData<Long> getEditFloraLiveData() {
+    public MutableLiveData<Boolean> getEditFloraLiveData() {
         return repository.getEditFloraLiveData();
     }
 

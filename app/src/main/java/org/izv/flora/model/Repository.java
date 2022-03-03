@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import org.izv.flora.model.api.FloraClient;
 import org.izv.flora.model.entity.CreateResponse;
+import org.izv.flora.model.entity.EditRowsResponse;
 import org.izv.flora.model.entity.Flora;
 import org.izv.flora.model.entity.Imagen;
 import org.izv.flora.model.entity.ImagesRowsResponse;
@@ -41,7 +42,7 @@ public class Repository {
     private MutableLiveData<ArrayList<Flora>> floraLiveData = new MutableLiveData<>();
     private MutableLiveData<Flora> uniqueFloraLiveData = new MutableLiveData<>();
     private MutableLiveData<Long> addFloraLiveData = new MutableLiveData<>();
-    private MutableLiveData<Long> editFloraLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> editFloraLiveData = new MutableLiveData<>();
     private MutableLiveData<Long> addImagenLiveData = new MutableLiveData<>();
     private MutableLiveData<ImagesRowsResponse> floraImagesLiveData = new MutableLiveData<>();
     private MutableLiveData<RowsResponse> floraDeleteLiveData = new MutableLiveData<>();
@@ -88,7 +89,7 @@ public class Repository {
         return floraDeleteLiveData;
     }
 
-    public MutableLiveData<Long> getEditFloraLiveData() {
+    public MutableLiveData<Boolean> getEditFloraLiveData() {
         return editFloraLiveData;
     }
 
@@ -167,16 +168,16 @@ public class Repository {
     }
 
     public void editFlora(long id, Flora flora) {
-        Call<RowsResponse> call = floraClient.editFlora(id, flora);
-        call.enqueue(new Callback<RowsResponse>() {
+        Call<EditRowsResponse> call = floraClient.editFlora(id, flora);
+        call.enqueue(new Callback<EditRowsResponse>() {
             @Override
-            public void onResponse(Call<RowsResponse> call, Response<RowsResponse> response) {
+            public void onResponse(Call<EditRowsResponse> call, Response<EditRowsResponse> response) {
                 editFloraLiveData.setValue(response.body().rows);
             }
 
             @Override
-            public void onFailure(Call<RowsResponse> call, Throwable t) {
-
+            public void onFailure(Call<EditRowsResponse> call, Throwable t) {
+                Log.v("xyzyx", t.getMessage());
             }
         });
     }

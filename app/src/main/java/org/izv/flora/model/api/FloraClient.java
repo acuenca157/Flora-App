@@ -1,6 +1,7 @@
 package org.izv.flora.model.api;
 
 import org.izv.flora.model.entity.CreateResponse;
+import org.izv.flora.model.entity.EditRowsResponse;
 import org.izv.flora.model.entity.ImagesRowsResponse;
 import org.izv.flora.model.entity.RowsResponse;
 import org.izv.flora.model.entity.Flora;
@@ -33,7 +34,7 @@ public interface FloraClient {
     Call<CreateResponse> createFlora(@Body Flora flora);
 
     @PUT("api/flora/{id}")
-    Call<RowsResponse> editFlora(@Path("id") long id, @Body Flora flora);
+    Call<EditRowsResponse> editFlora(@Path("id") long id, @Body Flora flora);
 
     @Multipart
     @POST("api/imagen/subir")
